@@ -1,5 +1,6 @@
 # mandelbrot
 
+Mandelbrot set visualizer
 
 ## How to Build
 
