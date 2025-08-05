@@ -1,6 +1,7 @@
 #ifndef MANDELBROT_H
 #define MANDELBROT_H
 
+#include "color.h"
 #include <complex>
 #include <vector>
 
@@ -74,6 +75,36 @@ namespace mandelbrot {
         std::complex<double> bottomRight,
         int imgWidth,
         int maxIterations
+    );
+
+    /**
+     * @brief Generate a colored representation of the Mandelbrot set, with
+     *        one color designating points inside the set and colors from a
+     *        gradient designating points outside the set
+     * 
+     * @param topLeft Top left point (i.e., number with highest imaginary
+     *                part and lowest real part)
+     * @param bottomRight Bottom right point (i.e., number with lowest 
+     *                    imaginary part and highest real part)
+     * @param imgWidth Width of the resulting image (i.e., number of columns)
+     * @param maxIterations Max number of iterations for `mandelbrot` function
+     * @param insideColor Color representing points inside the set
+     * @param outsideColors Colors that form a gradient which will be sampled
+     *                      to represent points outside the set. Values that
+     *                      take longer to become larger than 2 will sample
+     *                      from the right side (i.e., later colors) of the
+     *                      list, while values that quickly become larger
+     *                      than 2 will sample from the left side (i.e., 
+     *                      earlier colors) of the list.
+     * @return 2D vector of colors
+     */
+    std::vector<std::vector<color::Color>> generateColoredMandelbrot(
+        std::complex<double> topLeft,
+        std::complex<double> bottomRight,
+        int imgWidth,
+        int maxIterations,
+        color::Color insideColor,
+        std::vector<color::Color> outsideColors
     );
 
     /**

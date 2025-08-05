@@ -4,5 +4,7 @@ project(mandelbrot VERSION 0.1.0
 
 add_executable(mandelbrot src/main.cpp
                           src/mandelbrot.cpp
-                          src/mandelbrot.h)
+                          src/mandelbrot.h
+                          src/color.cpp
+                          src/color.h)
 

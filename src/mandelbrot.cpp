@@ -1,4 +1,5 @@
 #include "mandelbrot.h"
+#include "color.h"
 #include <complex>
 #include <vector>
 #include <iostream>
@@ -41,7 +42,7 @@ namespace mandelbrot {
 
         // Get width of a pixel in the resulting image, in the complex plane
         const double pixelWidth = horizontalDistance / imgWidth;
-        const int imgHeight = (int) (horizontalDistance / pixelWidth);
+        const int imgHeight = static_cast<int>(horizontalDistance / pixelWidth);
 
         // Because image coordinates start at (0, 0), we offset the starting
         // point to start at the top left
@@ -81,7 +82,7 @@ namespace mandelbrot {
 
         // Get width of a pixel in the resulting image, in the complex plane
         const double pixelWidth = horizontalDistance / imgWidth;
-        const int imgHeight = (int) (horizontalDistance / pixelWidth);
+        const int imgHeight = static_cast<int>(horizontalDistance / pixelWidth);
 
         // Because image coordinates start at (0, 0), we offset the starting
         // point to start at the top left
@@ -112,6 +113,58 @@ namespace mandelbrot {
                     // between 0 and 1 representing how long it took to grow
                     // larger than 2
                     img[i][j] = ((double) numIterations) / maxIterations;
+                }
+            }
+        }
+
+        return img;
+    }
+
+    std::vector<std::vector<color::Color>> generateColoredMandelbrot(
+        std::complex<double> topLeft,
+        std::complex<double> bottomRight,
+        int imgWidth,
+        int maxIterations,
+        color::Color insideColor,
+        std::vector<color::Color> outsideColors
+    ) {
+        // Get dimensions of image, in units of the complex plane
+        const double verticalDistance = bottomRight.imag() - topLeft.imag();
+        const double horizontalDistance = bottomRight.real() - topLeft.real();
+
+        // Get width of a pixel in the resulting image, in the complex plane
+        const double pixelWidth = horizontalDistance / imgWidth;
+        const int imgHeight = static_cast<int>(horizontalDistance / pixelWidth);
+
+        // Because image coordinates start at (0, 0), we offset the starting
+        // point to start at the top left
+        const double offsetReal = topLeft.real();
+        const double offsetImag = topLeft.imag();
+
+        std::vector<std::vector<color::Color>> img(
+            imgHeight, std::vector<color::Color>(imgWidth)
+        );
+
+        for (int i = 0; i < imgHeight; i++) {
+            for (int j = 0; j < imgWidth; j++) {
+                // Real part (analogous to x-value) increases (goes from left
+                // to right) starting from offset
+                const double real = (j * pixelWidth) + offsetReal;
+                // Imaginary part (analogous to y-balue) increases (goes from
+                // top to bottom) starting from offset
+                const double imag = -(i * pixelWidth) + offsetImag;
+                const std::complex<double> num(real, imag);
+
+                int numIterations = mandelbrotIterations(num, maxIterations);
+
+                if (numIterations < 0) {
+                    // Number does not grow infinitely - it's in the set
+                    img[i][j] = insideColor;
+                } else {
+                    // Number grows infinitely - it's outside the set
+                    const double pct = static_cast<double>(numIterations)
+                                       / maxIterations;
+                    img[i][j] = color::polylinearGradient(outsideColors, pct);
                 }
             }
         }
