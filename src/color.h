@@ -9,7 +9,7 @@ namespace color {
         uint8_t r, g, b;
     };
 
-    const std::vector<Color> sampleColors = {{7, 36, 250}, {255, 194, 26}, {255, 5, 5}};
+    const std::vector<Color> sampleColors = {{28, 43, 153}, {44, 97, 201}, {241, 247, 208}, {255, 194, 26}, {255, 5, 5}};
 
     /**
      * @brief Sample a color between two other colors

@@ -11,16 +11,36 @@ namespace bmp {
     const int FILE_HEADER_SIZE = 14;
     const int INFO_HEADER_SIZE = 40;
 
+    /**
+     * @brief
+     * 
+     * @param img
+     * @param fileName
+     */
     void exportMatrix(
         std::vector<std::vector<color::Color>> img,
         std::string fileName
     );
 
+    /**
+     * @brief
+     * 
+     * @param height
+     * @param stride
+     * @return 
+     */
     std::array<unsigned char, FILE_HEADER_SIZE> createFileHeader(
         int height,
         int stride
     );
 
+    /**
+     * @brief
+     * 
+     * @param height
+     * @param width
+     * @return
+     */
     std::array<unsigned char, INFO_HEADER_SIZE> createInfoHeader(
         int height,
         int width

@@ -24,7 +24,7 @@ namespace bmp {
 
         // Open file for output
         std::ofstream ofs;
-        ofs.open(fileName + ".bmp", std::ofstream::out);
+        ofs.open(fileName + ".bmp", std::ios::binary);
 
         // Write file header
         std::array<unsigned char, FILE_HEADER_SIZE> fileHeader
@@ -44,11 +44,11 @@ namespace bmp {
                 ofs.put(img[i][j].b);
                 ofs.put(img[i][j].g);
                 ofs.put(img[i][j].r);
+            }
 
-                // Write padding
-                for (int k = 0; k < paddingSize; k++) {
-                    ofs.put('0');
-                }
+            // Write padding
+            for (int k = 0; k < paddingSize; k++) {
+                ofs.put(0);
             }
         }
 
@@ -66,15 +66,15 @@ namespace bmp {
             0,0,      // signature (always "BM")
             0,0,0,0,  // image file size in bytes
             0,0,0,0,  // reserved (always 0)
-            0,0,0,0,  // offset to pixel array
+            0,0,0,0   // offset to pixel array
         };
 
-        fileHeader[0] = 'B';
-        fileHeader[1] = 'M';
-        fileHeader[ 2] = static_cast<unsigned char>(fileSize      );
-        fileHeader[ 3] = static_cast<unsigned char>(fileSize >>  8);
-        fileHeader[ 4] = static_cast<unsigned char>(fileSize >> 16);
-        fileHeader[ 5] = static_cast<unsigned char>(fileSize >> 24);
+        fileHeader[0]  = 'B';
+        fileHeader[1]  = 'M';
+        fileHeader[2]  = static_cast<unsigned char>(fileSize      );
+        fileHeader[3]  = static_cast<unsigned char>(fileSize >>  8);
+        fileHeader[4]  = static_cast<unsigned char>(fileSize >> 16);
+        fileHeader[5]  = static_cast<unsigned char>(fileSize >> 24);
         fileHeader[10] = static_cast<unsigned char>(FILE_HEADER_SIZE
                                                     + INFO_HEADER_SIZE);
 
@@ -96,16 +96,16 @@ namespace bmp {
             0,0,0,0,  // horizontal resolution
             0,0,0,0,  // vertical resolution
             0,0,0,0,  // colors in color table
-            0,0,0,0,  // important color count
+            0,0,0,0   // important color count
         };
 
-        infoHeader[ 0] = static_cast<unsigned char>(INFO_HEADER_SIZE);
-        infoHeader[ 4] = static_cast<unsigned char>(width      );
-        infoHeader[ 5] = static_cast<unsigned char>(width >>  8);
-        infoHeader[ 6] = static_cast<unsigned char>(width >> 16);
-        infoHeader[ 7] = static_cast<unsigned char>(width >> 24);
-        infoHeader[ 8] = static_cast<unsigned char>(height      );
-        infoHeader[ 9] = static_cast<unsigned char>(height >>  8);
+        infoHeader[0]  = static_cast<unsigned char>(INFO_HEADER_SIZE);
+        infoHeader[4]  = static_cast<unsigned char>(width      );
+        infoHeader[5]  = static_cast<unsigned char>(width >>  8);
+        infoHeader[6]  = static_cast<unsigned char>(width >> 16);
+        infoHeader[7]  = static_cast<unsigned char>(width >> 24);
+        infoHeader[8]  = static_cast<unsigned char>(height      );
+        infoHeader[9]  = static_cast<unsigned char>(height >>  8);
         infoHeader[10] = static_cast<unsigned char>(height >> 16);
         infoHeader[11] = static_cast<unsigned char>(height >> 24);
         infoHeader[12] = static_cast<unsigned char>(1);
