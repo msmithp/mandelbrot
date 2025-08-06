@@ -37,12 +37,12 @@ namespace mandelbrot {
         int maxIterations
     ) {
         // Get dimensions of image, in units of the complex plane
-        const double verticalDistance = bottomRight.imag() - topLeft.imag();
+        const double verticalDistance = topLeft.imag() - bottomRight.imag();
         const double horizontalDistance = bottomRight.real() - topLeft.real();
 
         // Get width of a pixel in the resulting image, in the complex plane
         const double pixelWidth = horizontalDistance / imgWidth;
-        const int imgHeight = static_cast<int>(horizontalDistance / pixelWidth);
+        const int imgHeight = static_cast<int>(verticalDistance / pixelWidth);
 
         // Because image coordinates start at (0, 0), we offset the starting
         // point to start at the top left
@@ -77,12 +77,12 @@ namespace mandelbrot {
         int maxIterations
     ) {
         // Get dimensions of image, in units of the complex plane
-        const double verticalDistance = bottomRight.imag() - topLeft.imag();
+        const double verticalDistance = topLeft.imag() - bottomRight.imag();
         const double horizontalDistance = bottomRight.real() - topLeft.real();
 
         // Get width of a pixel in the resulting image, in the complex plane
         const double pixelWidth = horizontalDistance / imgWidth;
-        const int imgHeight = static_cast<int>(horizontalDistance / pixelWidth);
+        const int imgHeight = static_cast<int>(verticalDistance / pixelWidth);
 
         // Because image coordinates start at (0, 0), we offset the starting
         // point to start at the top left
@@ -129,12 +129,12 @@ namespace mandelbrot {
         std::vector<color::Color> outsideColors
     ) {
         // Get dimensions of image, in units of the complex plane
-        const double verticalDistance = bottomRight.imag() - topLeft.imag();
+        const double verticalDistance = topLeft.imag() - bottomRight.imag();
         const double horizontalDistance = bottomRight.real() - topLeft.real();
 
         // Get width of a pixel in the resulting image, in the complex plane
         const double pixelWidth = horizontalDistance / imgWidth;
-        const int imgHeight = static_cast<int>(horizontalDistance / pixelWidth);
+        const int imgHeight = static_cast<int>(verticalDistance / pixelWidth);
 
         // Because image coordinates start at (0, 0), we offset the starting
         // point to start at the top left

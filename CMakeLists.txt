@@ -6,5 +6,7 @@ add_executable(mandelbrot src/main.cpp
                           src/mandelbrot.cpp
                           src/mandelbrot.h
                           src/color.cpp
-                          src/color.h)
+                          src/color.h
+                          src/bmp.cpp
+                          src/bmp.h)
 

@@ -35,7 +35,7 @@ namespace color {
         };
     }
 
-    Color polylinearGradient(std::vector<Color> colors, double pct) {
+    Color polylinearGradient(const std::vector<Color> colors, double pct) {
         if (colors.size() == 1) {
             return colors[0];
         } else if (colors.size() == 2) {
