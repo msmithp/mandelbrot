@@ -9,6 +9,8 @@ namespace color {
         uint8_t r, g, b;
     };
 
+    const std::vector<Color> sampleColors = {{7, 36, 250}, {255, 194, 26}, {255, 5, 5}};
+
     /**
      * @brief Sample a color between two other colors
      * 
@@ -31,7 +33,7 @@ namespace color {
      *            last color in `colors`
      * @return Sampled color
      */
-    Color polylinearGradient(std::vector<Color> colors, double pct);
+    Color polylinearGradient(const std::vector<Color> colors, double pct);
 }
 
 #endif
