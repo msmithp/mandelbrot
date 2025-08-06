@@ -22,7 +22,7 @@ namespace bmp {
         // True width of the image array, accounting for padding
         const int stride = widthInBytes + paddingSize;
 
-        // Open file for output
+        // Open file for output in binary mode
         std::ofstream ofs;
         ofs.open(fileName + ".bmp", std::ios::binary);
 

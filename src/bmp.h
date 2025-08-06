@@ -12,10 +12,11 @@ namespace bmp {
     const int INFO_HEADER_SIZE = 40;
 
     /**
-     * @brief
+     * @brief Export a matrix of RGB values as a .bmp file
      * 
-     * @param img
-     * @param fileName
+     * @param img Matrix of colors, as RGB values
+     * @param fileName Name of exported file, excluding the `.bmp` file
+     *                 extension
      */
     void exportMatrix(
         std::vector<std::vector<color::Color>> img,
@@ -23,11 +24,11 @@ namespace bmp {
     );
 
     /**
-     * @brief
+     * @brief Create a .bmp file header
      * 
-     * @param height
-     * @param stride
-     * @return 
+     * @param height Height of image, in pixels
+     * @param stride Stride of image (width plus padding), in pixels
+     * @return File header
      */
     std::array<unsigned char, FILE_HEADER_SIZE> createFileHeader(
         int height,
@@ -35,11 +36,11 @@ namespace bmp {
     );
 
     /**
-     * @brief
+     * @brief Create a .bmp info header
      * 
-     * @param height
-     * @param width
-     * @return
+     * @param height Height of image, in pixels
+     * @param width Width of image (not including padding), in pixels
+     * @return Info header
      */
     std::array<unsigned char, INFO_HEADER_SIZE> createInfoHeader(
         int height,
