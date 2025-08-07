@@ -30,19 +30,39 @@ namespace mandelbrot {
         return -1;
     }
 
+    double getPixelWidth(
+        std::complex<double> topLeft,
+        std::complex<double> bottomRight,
+        double imgWidth
+    ) {
+        const double horizontalDistance = bottomRight.real() - topLeft.real();
+
+        // In order for `imgWidth` pixels to be spread across
+        // `horizontalDistance`, each pixel must represent
+        // `horizontalDistance / imgWidth` in the complex plane
+        return horizontalDistance / imgWidth;
+    }
+
+    int getImgHeight(
+        std::complex<double> topLeft,
+        std::complex<double> bottomRight,
+        double pixelWidth
+    ) {
+        const double verticalDistance = topLeft.imag() - bottomRight.imag();
+        return static_cast<int>(verticalDistance / pixelWidth);
+    }
+
     std::vector<std::vector<bool>> generateBinaryMandelbrot(
         std::complex<double> topLeft, 
         std::complex<double> bottomRight,
         int imgWidth,
         int maxIterations
     ) {
-        // Get dimensions of image, in units of the complex plane
-        const double verticalDistance = topLeft.imag() - bottomRight.imag();
-        const double horizontalDistance = bottomRight.real() - topLeft.real();
-
         // Get width of a pixel in the resulting image, in the complex plane
-        const double pixelWidth = horizontalDistance / imgWidth;
-        const int imgHeight = static_cast<int>(verticalDistance / pixelWidth);
+        const double pixelWidth = getPixelWidth(topLeft, bottomRight, imgWidth);
+
+        // Get image height based on pixel width
+        const int imgHeight = getImgHeight(topLeft, bottomRight, pixelWidth);
 
         // Because image coordinates start at (0, 0), we offset the starting
         // point to start at the top left
@@ -58,7 +78,7 @@ namespace mandelbrot {
                 // Real part (analogous to x-value) increases (goes from left
                 // to right) starting from offset
                 const double real = (j * pixelWidth) + offsetReal;
-                // Imaginary part (analogous to y-balue) increases (goes from
+                // Imaginary part (analogous to y-balue) decreases (goes from
                 // top to bottom) starting from offset
                 const double imag = -(i * pixelWidth) + offsetImag;
                 const std::complex<double> num(real, imag);
@@ -76,13 +96,11 @@ namespace mandelbrot {
         int imgWidth,
         int maxIterations
     ) {
-        // Get dimensions of image, in units of the complex plane
-        const double verticalDistance = topLeft.imag() - bottomRight.imag();
-        const double horizontalDistance = bottomRight.real() - topLeft.real();
-
         // Get width of a pixel in the resulting image, in the complex plane
-        const double pixelWidth = horizontalDistance / imgWidth;
-        const int imgHeight = static_cast<int>(verticalDistance / pixelWidth);
+        const double pixelWidth = getPixelWidth(topLeft, bottomRight, imgWidth);
+
+        // Get image height based on pixel width
+        const int imgHeight = getImgHeight(topLeft, bottomRight, pixelWidth);
 
         // Because image coordinates start at (0, 0), we offset the starting
         // point to start at the top left
@@ -98,7 +116,7 @@ namespace mandelbrot {
                 // Real part (analogous to x-value) increases (goes from left
                 // to right) starting from offset
                 const double real = (j * pixelWidth) + offsetReal;
-                // Imaginary part (analogous to y-balue) increases (goes from
+                // Imaginary part (analogous to y-balue) decreases (goes from
                 // top to bottom) starting from offset
                 const double imag = -(i * pixelWidth) + offsetImag;
                 const std::complex<double> num(real, imag);
@@ -112,7 +130,7 @@ namespace mandelbrot {
                     // Number grows infinitely, so set img[i][j] to a value
                     // between 0 and 1 representing how long it took to grow
                     // larger than 2
-                    img[i][j] = ((double) numIterations) / maxIterations;
+                    img[i][j] = static_cast<double>(numIterations) / maxIterations;
                 }
             }
         }
@@ -128,13 +146,11 @@ namespace mandelbrot {
         color::Color insideColor,
         std::vector<color::Color> outsideColors
     ) {
-        // Get dimensions of image, in units of the complex plane
-        const double verticalDistance = topLeft.imag() - bottomRight.imag();
-        const double horizontalDistance = bottomRight.real() - topLeft.real();
-
         // Get width of a pixel in the resulting image, in the complex plane
-        const double pixelWidth = horizontalDistance / imgWidth;
-        const int imgHeight = static_cast<int>(verticalDistance / pixelWidth);
+        const double pixelWidth = getPixelWidth(topLeft, bottomRight, imgWidth);
+
+        // Get image height based on pixel width
+        const int imgHeight = getImgHeight(topLeft, bottomRight, pixelWidth);
 
         // Because image coordinates start at (0, 0), we offset the starting
         // point to start at the top left
@@ -150,7 +166,7 @@ namespace mandelbrot {
                 // Real part (analogous to x-value) increases (goes from left
                 // to right) starting from offset
                 const double real = (j * pixelWidth) + offsetReal;
-                // Imaginary part (analogous to y-balue) increases (goes from
+                // Imaginary part (analogous to y-balue) decreases (goes from
                 // top to bottom) starting from offset
                 const double imag = -(i * pixelWidth) + offsetImag;
                 const std::complex<double> num(real, imag);

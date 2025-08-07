@@ -37,6 +37,41 @@ namespace mandelbrot {
     int mandelbrotIterations(std::complex<double> num, int maxIterations);
 
     /**
+     * @brief Get the width of a pixel based on the image width and bounds of
+     *        the image in the complex plane
+     * 
+     * @param topLeft Top left point (i.e., number with highest imaginary
+     *                part and lowest real part)
+     * @param bottomRight Bottom right point (i.e., number with lowest 
+     *                    imaginary part and highest real part)
+     * @param imgWidth Width of the resulting image (i.e., number of columns)
+     * @return Width of pixel, in units of the complex plane, necessary to
+     *         generate an image of the specified width
+     */
+    double getPixelWidth(
+        std::complex<double> topLeft,
+        std::complex<double> bottomRight,
+        double imgWidth
+    );
+
+    /**
+     * @brief Get the height of an image of the complex plane based on the
+     *        pixel width and image bounds
+     * 
+     * @param topLeft Top left point (i.e., number with highest imaginary
+     *                part and lowest real part)
+     * @param bottomRight Bottom right point (i.e., number with lowest 
+     *                    imaginary part and highest real part)
+     * @param pixelWidth Width of a pixel, in units of the complex plane
+     * @return Image height, in pixels
+     */
+    int getImgHeight(
+        std::complex<double> topLeft,
+        std::complex<double> bottomRight,
+        double pixelWidth
+    );
+
+    /**
      * @brief Generate a graphical representation of the Mandelbrot set
      * 
      * @param topLeft Top left point (i.e., number with highest imaginary
