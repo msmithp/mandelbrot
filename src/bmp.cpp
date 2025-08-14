@@ -8,8 +8,8 @@
 
 namespace bmp {
     void exportMatrix(
-        std::vector<std::vector<color::Color>> img,
-        std::string fileName
+        const std::vector<std::vector<color::Color>>& img,
+        const std::string& fileName
     ) {
         const int height = img.size();
         const int width = img[0].size();

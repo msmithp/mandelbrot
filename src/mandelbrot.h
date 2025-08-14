@@ -139,7 +139,7 @@ namespace mandelbrot {
         int imgWidth,
         int maxIterations,
         color::Color insideColor,
-        std::vector<color::Color> outsideColors
+        const std::vector<color::Color>& outsideColors
     );
 
     /**
@@ -149,7 +149,7 @@ namespace mandelbrot {
      * 
      * @param img Mandelbrot set, as a 2D vector of boolean values
      */
-    void printMandelbrot(std::vector<std::vector<bool>> img);
+    void printMandelbrot(const std::vector<std::vector<bool>>& img);
 
     /**
      * @brief Print a visual representation of the Mandelbrot set in which
@@ -159,7 +159,7 @@ namespace mandelbrot {
      * @param img Mandelbrot set, as a 2D vector of values between 0 and 1,
      *            with values in the set represented with -1
      */
-    void printMandelbrot(std::vector<std::vector<double>> img);
+    void printMandelbrot(const std::vector<std::vector<double>>& img);
 }
 
 #endif

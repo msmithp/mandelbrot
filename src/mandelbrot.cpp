@@ -144,7 +144,7 @@ namespace mandelbrot {
         int imgWidth,
         int maxIterations,
         color::Color insideColor,
-        std::vector<color::Color> outsideColors
+        const std::vector<color::Color>& outsideColors
     ) {
         // Get width of a pixel in the resulting image, in the complex plane
         const double pixelWidth = getPixelWidth(topLeft, bottomRight, imgWidth);
@@ -188,7 +188,7 @@ namespace mandelbrot {
         return img;
     }
 
-    void printMandelbrot(std::vector<std::vector<bool>> img) {
+    void printMandelbrot(const std::vector<std::vector<bool>>& img) {
         if (img.size() == 0) {
             return;
         }
@@ -206,7 +206,7 @@ namespace mandelbrot {
         }
     }
 
-    void printMandelbrot(std::vector<std::vector<double>> img) {
+    void printMandelbrot(const std::vector<std::vector<double>>& img) {
         if (img.size() == 0) {
             return;
         }

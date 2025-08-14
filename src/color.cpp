@@ -29,13 +29,13 @@ namespace color {
         const int b3 = b1 + static_cast<int>(std::round((b2 - b1) * pct));
 
         return {
-            static_cast<int>(r3),
-            static_cast<int>(g3),
-            static_cast<int>(b3)
+            static_cast<unsigned char>(r3),
+            static_cast<unsigned char>(g3),
+            static_cast<unsigned char>(b3)
         };
     }
 
-    Color polylinearGradient(const std::vector<Color> colors, double pct) {
+    Color polylinearGradient(const std::vector<Color>& colors, double pct) {
         if (colors.size() == 1) {
             return colors[0];
         } else if (colors.size() == 2) {

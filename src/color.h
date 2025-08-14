@@ -42,7 +42,7 @@ namespace color {
      *            last color in `colors`
      * @return Sampled color
      */
-    Color polylinearGradient(const std::vector<Color> colors, double pct);
+    Color polylinearGradient(const std::vector<Color>& colors, double pct);
 }
 
 #endif

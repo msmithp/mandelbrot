@@ -19,8 +19,8 @@ namespace bmp {
      *                 extension
      */
     void exportMatrix(
-        std::vector<std::vector<color::Color>> img,
-        std::string fileName
+        const std::vector<std::vector<color::Color>>& img,
+        const std::string& fileName
     );
 
     /**
